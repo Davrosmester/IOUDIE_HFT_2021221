@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{E382AB6F-F23C-4B21-81B6-4693073A9078}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{65C836A9-FD7C-4CCC-9F00-C6FB107C200A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOUDIE_HFT_2021221.Models", "IOUDIE_HFT_2021221.Models\IOUDIE_HFT_2021221.Models.csproj", "{7A95A274-662D-4950-8D23-5951F29C4B31}"
 EndProject
