@@ -4,4 +4,11 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IOUDIE_HFT_2021221.Data\IOUDIE_HFT_2021221.Data.csproj" />
+    <ProjectReference Include="..\IOUDIE_HFT_2021221.Logic\IOUDIE_HFT_2021221.Logic.csproj" />
+    <ProjectReference Include="..\IOUDIE_HFT_2021221.Models\IOUDIE_HFT_2021221.Models.csproj" />
+    <ProjectReference Include="..\IOUDIE_HFT_2021221.Repository\IOUDIE_HFT_2021221.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
