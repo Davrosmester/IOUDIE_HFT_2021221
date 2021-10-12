@@ -8,4 +8,13 @@
     <ProjectReference Include="..\IOUDIE_HFT_2021221.Models\IOUDIE_HFT_2021221.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Database1.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Database1_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
