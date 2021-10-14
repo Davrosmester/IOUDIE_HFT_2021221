@@ -29,22 +29,22 @@ namespace IOUDIE_HFT_2021221.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database1.mdf;integrated security=True;MultipleActiveResultsSets=True");
+                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;attachDbFilename=|DataDirectory|\Database1.mdf;Integrated security=True;MultipleActiveResultSets=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             Brand bmw = new Brand() { Id = 1, Name = "BMW" };
-            Brand toyota = new Brand() { Id = 1, Name = "Toyota" };
-            Brand audi = new Brand() { Id = 1, Name = "Audi" };
+            Brand toyota = new Brand() { Id = 2, Name = "Toyota" };
+            Brand audi = new Brand() { Id = 3, Name = "Audi" };
 
             Car bmw1 = new Car() { Id = 1, BrandId = bmw.Id, BasePrice = 20000, Model = "BMW 116d" };
             Car bmw2 = new Car() { Id = 2, BrandId = bmw.Id, BasePrice = 50000, Model = "BMW X6" };
-            Car toyota1 = new Car() { Id = 1, BrandId = toyota.Id, BasePrice = 100000, Model = "Toyota Celica" };
-            Car toyota2= new Car() { Id = 2, BrandId = toyota.Id, BasePrice = 10000, Model = "Toyota Yaris" };
-            Car audi1 = new Car() { Id = 1, BrandId = audi.Id, BasePrice = 25000, Model = "Audi A6" };
-            Car audi2 = new Car() { Id = 1, BrandId = audi.Id, BasePrice = 55000, Model = "Audi RS6" };
+            Car toyota1 = new Car() { Id = 3, BrandId = toyota.Id, BasePrice = 100000, Model = "Toyota Celica" };
+            Car toyota2= new Car() { Id = 4, BrandId = toyota.Id, BasePrice = 10000, Model = "Toyota Yaris" };
+            Car audi1 = new Car() { Id = 5, BrandId = audi.Id, BasePrice = 25000, Model = "Audi A6" };
+            Car audi2 = new Car() { Id = 6, BrandId = audi.Id, BasePrice = 55000, Model = "Audi RS6" };
 
             Drivers audidriver1 = new Drivers() { Id = 1, Age = 42, Name = "Jani", CarId = audi1.Id };
             Drivers audidriver2 = new Drivers() { Id = 2, Age = 30, Name = "Kristof", CarId = audi2.Id };
@@ -60,7 +60,6 @@ namespace IOUDIE_HFT_2021221.Models
                 .HasForeignKey(car => car.BrandId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
              
-                
              });
 
             modelBuilder.Entity<Drivers>(entity =>
@@ -74,10 +73,6 @@ namespace IOUDIE_HFT_2021221.Models
             modelBuilder.Entity<Brand>().HasData(bmw, toyota, audi);
             modelBuilder.Entity<Car>().HasData(bmw1, bmw2, toyota1, toyota2, audi1, audi2);
             modelBuilder.Entity<Drivers>().HasData(bmwdriver1,bmwdriver2,audidriver1,audidriver2,toyotadriver1,toyotadriver2);
-
-
-
-
 
         }
 

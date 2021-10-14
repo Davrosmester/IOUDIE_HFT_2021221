@@ -21,10 +21,10 @@ namespace IOUDIE_HFT_2021221.Models
 
         public int? BasePrice { get; set; }
 
-        public Brand Brand { get; set; }
+        public virtual Brand Brand { get; set; }
 
         public int BrandId { get; set; }
 
-        public List<Drivers> Drivers { get; set; }
+        public virtual List<Drivers> Drivers { get; set; }
     }
 }
