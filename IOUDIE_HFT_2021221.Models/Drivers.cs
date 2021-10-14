@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace IOUDIE_HFT_2021221.Models
 {
     [Table("drivers")]
-    class Drivers
+    public class Drivers
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,7 +17,8 @@ namespace IOUDIE_HFT_2021221.Models
         public int Age { get; set; }
         public string Name { get; set; }
 
-        public bool DriversLicense { get; set; }
+        public Car Car { get; set; }
 
+        public int CarId { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace IOUDIE_HFT_2021221.Models
 {
     [Table("cars")]
    
-    class Car
+    public class Car
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -24,5 +24,7 @@ namespace IOUDIE_HFT_2021221.Models
         public Brand Brand { get; set; }
 
         public int BrandId { get; set; }
+
+        public List<Drivers> Drivers { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace IOUDIE_HFT_2021221.Models
 {
     [Table("brands")]
 
-    class Brand
+    public class Brand
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
