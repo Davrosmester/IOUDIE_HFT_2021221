@@ -9,7 +9,7 @@ namespace IOUDIE_HFT_2021221.Repository
 {
     public interface IRepository<T> where T:class
     {
-        T GetTOne(int id);
+        T GetOne(int id);
         IQueryable<T> GetAll();
         void Delete(T entity);
         void Create(T entity); //only create not update
@@ -21,5 +21,10 @@ namespace IOUDIE_HFT_2021221.Repository
     public interface IBrandRepository : IRepository<Brand>
     {
         void ChangeBrandName(int id, string newBrandName);
+    }
+
+    public interface IDriversRepository : IRepository<Drivers>
+    {
+        void ChangeDriverName(int id, string newDriverName);
     }
 }
