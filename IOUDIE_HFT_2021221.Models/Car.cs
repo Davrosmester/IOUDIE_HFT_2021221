@@ -22,7 +22,7 @@ namespace IOUDIE_HFT_2021221.Models
         public int? BasePrice { get; set; }
 
         public virtual Brand Brand { get; set; }
-
+        [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }
 
         public virtual List<Drivers> Drivers { get; set; }

@@ -18,7 +18,7 @@ namespace IOUDIE_HFT_2021221.Models
         public string Name { get; set; }
 
         public virtual Car Car { get; set; }
-
+        [ForeignKey(nameof(Car))]
         public int CarId { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace IOUDIE_HFT_2021221.Logic
     {
         public string BrandName { get; set; }
         public double AveragePrice { get; set; }
-        public double AverageAge { get; set; }
+       // public double AverageAge { get; set; }
 
 
         public override bool Equals(object obj)
@@ -18,7 +18,8 @@ namespace IOUDIE_HFT_2021221.Logic
             if (obj is AverageResult)
             {
                 var other = obj as AverageResult;
-                return this.AveragePrice == other.AveragePrice && this.BrandName == other.BrandName && this.AverageAge==other.AverageAge;
+                return this.AveragePrice == other.AveragePrice && this.BrandName == other.BrandName;
+                   /* && this.AverageAge==other.AverageAge;*/ //close
             }
             else
             {
@@ -28,11 +29,11 @@ namespace IOUDIE_HFT_2021221.Logic
         }
         public override int GetHashCode()
         {
-            return this.BrandName.GetHashCode() + (int)this.AveragePrice + (int)this.AverageAge;
+            return this.BrandName.GetHashCode() + (int)this.AveragePrice/* + (int)this.AverageAge*/;
         }
         public override string ToString()
         {
-            return $"BrandName={BrandName}, AveragePrice={AveragePrice}, AverageAge{AverageAge}"; 
+            return $"BrandName={BrandName}, AveragePrice={AveragePrice},"; 
         }
     }
 
@@ -146,7 +147,7 @@ namespace IOUDIE_HFT_2021221.Logic
         IList<Drivers> GetAll();
         Drivers GetOne(int id);
         void ChangeDriverName(int id,string newDriverName);
-        IList<AverageResult> GetDriverAgeAverages();
+        //IList<AverageResult> GetDriverAgeAverages();
         void Create(Drivers newDriver);
         void Delete(Drivers forDelete);
     }
@@ -184,16 +185,16 @@ namespace IOUDIE_HFT_2021221.Logic
             return driversRepo.GetAll().ToList();
         }
 
-        public IList<AverageResult> GetDriverAgeAverages()
-        {
-            var q = from driver in driversRepo.GetAll()
-                    group driver by new { driver.Age } into g
-                    select new AverageResult()
-                    {
-                        AverageAge = g.Average(x => x.Age)
-                    };
-            return q.ToList();
-        }
+        //public IList<AverageResult> GetDriverAgeAverages()
+        //{
+        //    var q = from driver in driversRepo.GetAll()
+        //            group driver by new { driver.Age } into g
+        //            select new AverageResult()
+        //            {
+        //                AverageAge = g.Average(x => x.Age)
+        //            };
+        //    return q.ToList();
+        //}
 
         public Drivers GetOne(int id)
         {
