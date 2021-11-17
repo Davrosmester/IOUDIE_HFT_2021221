@@ -15,7 +15,6 @@ namespace IOUDIE_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         [Required]
         public string Model { get; set; }
 
@@ -25,6 +24,8 @@ namespace IOUDIE_HFT_2021221.Models
         [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }
 
-        public virtual List<Drivers> Drivers { get; set; }
+        public virtual List<Driver> Drivers { get; set; }
+
+
     }
 }

@@ -13,7 +13,7 @@ namespace IOUDIE_HFT_2021221.Models
 
         public virtual DbSet<Brand> Brand { get; set; }
 
-        public virtual DbSet<Drivers> Driver { get; set; }
+        public virtual DbSet<Driver> Driver { get; set; }
 
         public CarDBContext()
         {
@@ -46,12 +46,12 @@ namespace IOUDIE_HFT_2021221.Models
             Car audi1 = new Car() { Id = 5, BrandId = audi.Id, BasePrice = 25000, Model = "Audi A6" };
             Car audi2 = new Car() { Id = 6, BrandId = audi.Id, BasePrice = 55000, Model = "Audi RS6" };
 
-            Drivers audidriver1 = new Drivers() { Id = 1, Age = 42, Name = "Jani", CarId = audi1.Id };
-            Drivers audidriver2 = new Drivers() { Id = 2, Age = 30, Name = "Kristof", CarId = audi2.Id };
-            Drivers toyotadriver1 = new Drivers() { Id = 3, Age = 18, Name = "Mark", CarId = toyota1.Id };
-            Drivers toyotadriver2 = new Drivers() { Id = 4, Age = 22, Name = "Joseph", CarId = toyota2.Id };
-            Drivers bmwdriver1 = new Drivers() { Id = 5, Age = 56, Name = "Achilles", CarId = bmw1.Id };
-            Drivers bmwdriver2 = new Drivers() { Id = 6, Age = 48, Name = "Aurelio", CarId = bmw2.Id };
+            Driver audidriver1 = new Driver() { Id = 1, Age = 42, Name = "Jani", CarId = audi1.Id };
+            Driver audidriver2 = new Driver() { Id = 2, Age = 30, Name = "Kristof", CarId = audi2.Id };
+            Driver toyotadriver1 = new Driver() { Id = 3, Age = 18, Name = "Mark", CarId = toyota1.Id };
+            Driver toyotadriver2 = new Driver() { Id = 4, Age = 22, Name = "Joseph", CarId = toyota2.Id };
+            Driver bmwdriver1 = new Driver() { Id = 5, Age = 56, Name = "Achilles", CarId = bmw1.Id };
+            Driver bmwdriver2 = new Driver() { Id = 6, Age = 48, Name = "Aurelio", CarId = bmw2.Id };
 
             modelBuilder.Entity<Car>(entity => 
             {
@@ -62,7 +62,7 @@ namespace IOUDIE_HFT_2021221.Models
              
              });
 
-            modelBuilder.Entity<Drivers>(entity =>
+            modelBuilder.Entity<Driver>(entity =>
             {
                 entity.HasOne(car => car.Car)
                     .WithMany(car => car.Drivers)
@@ -72,7 +72,7 @@ namespace IOUDIE_HFT_2021221.Models
 
             modelBuilder.Entity<Brand>().HasData(bmw, toyota, audi);
             modelBuilder.Entity<Car>().HasData(bmw1, bmw2, toyota1, toyota2, audi1, audi2);
-            modelBuilder.Entity<Drivers>().HasData(bmwdriver1,bmwdriver2,audidriver1,audidriver2,toyotadriver1,toyotadriver2);
+            modelBuilder.Entity<Driver>().HasData(bmwdriver1,bmwdriver2,audidriver1,audidriver2,toyotadriver1,toyotadriver2);
 
         }
 

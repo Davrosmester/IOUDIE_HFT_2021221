@@ -17,13 +17,14 @@ namespace IOUDIE_HFT_2021221.Repository
     public interface ICarShopRepository : IRepository<Car>
     {
         void ChangePrice(int id, int newPrice); //update
+        
     }
     public interface IBrandRepository : IRepository<Brand>
     {
         void ChangeBrandName(int id, string newBrandName);
     }
 
-    public interface IDriversRepository : IRepository<Drivers>
+    public interface IDriversRepository : IRepository<Driver>
     {
         void ChangeDriverName(int id, string newDriverName);
     }

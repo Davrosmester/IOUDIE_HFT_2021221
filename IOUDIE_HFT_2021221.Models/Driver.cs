@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace IOUDIE_HFT_2021221.Models
 {
     [Table("drivers")]
-    public class Drivers
+    public class Driver
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,6 +18,8 @@ namespace IOUDIE_HFT_2021221.Models
         public string Name { get; set; }
 
         public virtual Car Car { get; set; }
+
+
         [ForeignKey(nameof(Car))]
         public int CarId { get; set; }
     }

@@ -5,6 +5,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace IOUDIE_HFT_2021221.Test
@@ -17,7 +18,7 @@ namespace IOUDIE_HFT_2021221.Test
         Mock<IDriversRepository> mockDriverRepo = new Mock<IDriversRepository>();
         DriverLogic driverLogic;
         public TestWithMock()
-        {
+        { 
             carLogic = new CarLogic(mockCarRepo.Object);
 
             Brand peugeot = new Brand() { Name = "Peugeot" };
@@ -28,45 +29,51 @@ namespace IOUDIE_HFT_2021221.Test
                 {
                     new Car()
                     {
+                        Id=1,
                         Brand=peugeot,
                         Model="306",
                         BasePrice=1000
                     },
                     new Car()
                     {
+                        Id=2,
                         Brand=peugeot,
                         Model="406",
                         BasePrice=2000
-                    }
+                    }, 
+                    
                 }.AsQueryable()
              );
 
-            //driverLogic = new DriverLogic(mockDriverRepo.Object);
+            driverLogic = new DriverLogic(mockDriverRepo.Object);
+            mockDriverRepo.Setup(driverRepo => driverRepo.Create(It.IsAny<Driver>()));
+            mockDriverRepo.Setup(driverRepo => driverRepo.GetAll()).Returns(
+                new List<Driver>
+                {
+                    new Driver()
+                    {
+                        Age=42,
+                        Name="janos",
+                        Id=1,
+                        Car=carLogic.GetOne(1)
+                    },
+                    new Driver()
+                    {
+                        Id=2,
+                        Name="joska",
+                        Age=66,
+                        Car=carLogic.GetOne(2)
+                    }
+                }.AsQueryable()
 
-            //Drivers jani = new Drivers() { Name="Jani" };
-            //mockDriverRepo.Setup(driverRepo => driverRepo.Create(It.IsAny<Drivers>()));
 
-            //mockDriverRepo.Setup(driverRepo => driverRepo.GetAll()).Returns(
-            //    new List<Drivers>
-            //    {
-            //        new Drivers()
-            //        {
-            //            Name=jani.Name,
-            //            Age=100
-            //        },
-            //        new Drivers()
-            //        {
-            //            Name=jani.Name,
-            //            Age=200
-            //        }
-            //    }.AsQueryable()
-            //    );
+
+                ) ;
         }
 
 
         [TestCase(1)]
         [TestCase(10)]
-        [TestCase(100)]
         public void TestCreateValid(int brandId)
         {
             Assert.That(
@@ -78,9 +85,10 @@ namespace IOUDIE_HFT_2021221.Test
                 ;
 
         }
+
+
         [TestCase(-1)]
         [TestCase(-10)]
-        [TestCase(-100)]
         public void TestCreateInValid(int brandId)
         {
             Assert.That(
@@ -125,36 +133,47 @@ namespace IOUDIE_HFT_2021221.Test
                 }
                 ));
         }
-        //[Test]
-        //public void TestAgeAverage()
-        //{
-        //    Drivers jani = new Drivers() { Age = 45, Id = 1 };
-        //    driverLogic.Create(
-        //        new Drivers()
-        //        {
-        //            Id=1,
-        //            Name = jani.Name,
-        //            Age = 100
-        //        }
-        //        );
-        //    driverLogic.Create(
-        //        new Drivers()
-        //        {
-        //            Id=1,
-        //            Name = jani.Name,
-        //            Age = 200
-        //        }
-        //        );
-        //    var res = driverLogic.GetDriverAgeAverages();
-        //    Assert.That(res, Is.EquivalentTo(
-        //        new List<AverageResult>
-        //        {
-        //            new AverageResult()
-        //            {
-        //                AverageAge=150
-        //            }
-        //        }
-        //        ));
+
+        [Test]
+        public void TestExpensiveCarModels()
+        {
+            carLogic.ExpensiveCars().ToList().ForEach(cars => Assert.That(cars.BasePrice >= 18500));
+
+        }
+        
+        
+        [Test]
+         public void TestInExpensiveCarModels()
+        {
+            carLogic.InExpensiveCars().ToList().ForEach(cars => Assert.That(cars.BasePrice < 18500));
+        }
+
+        [Test]
+        public void IsYoungDriver()
+        {
+            driverLogic.YoungDrivers().ToList().ForEach(drivers => Assert.That(drivers.Age < 50));
+        }
+        
+        [Test]
+        public void IsElderDriver()
+        {
+            driverLogic.ElderDrivers().ToList().ForEach(drivers => Assert.That(drivers.Age >= 50));
+        }
+        [TestCase("306")]
+        [TestCase("406")]
+        
+        public void TestGetByModel(string model)
+        {
+            Assert.That(carLogic.GetByModel(model).All(x=>x.Model==model));
+        }
+
+        [TestCase("4006")]
+        [TestCase("206")]
+        public void TestGetByModelInvalid(string model)
+        {
+            Assert.That(carLogic.GetByModel(model).All(x => x.Model != model));
+        }
+
     }
 }
 

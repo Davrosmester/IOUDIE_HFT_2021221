@@ -10,7 +10,7 @@ namespace IOUDIE_HFT_2021221.Logic
     {
         public string BrandName { get; set; }
         public double AveragePrice { get; set; }
-       // public double AverageAge { get; set; }
+       
 
 
         public override bool Equals(object obj)
@@ -19,7 +19,7 @@ namespace IOUDIE_HFT_2021221.Logic
             {
                 var other = obj as AverageResult;
                 return this.AveragePrice == other.AveragePrice && this.BrandName == other.BrandName;
-                   /* && this.AverageAge==other.AverageAge;*/ //close
+                   //close
             }
             else
             {
@@ -29,7 +29,7 @@ namespace IOUDIE_HFT_2021221.Logic
         }
         public override int GetHashCode()
         {
-            return this.BrandName.GetHashCode() + (int)this.AveragePrice/* + (int)this.AverageAge*/;
+            return this.BrandName.GetHashCode() + (int)this.AveragePrice;
         }
         public override string ToString()
         {
@@ -39,6 +39,9 @@ namespace IOUDIE_HFT_2021221.Logic
 
     public interface ICarLogic
     {
+        IEnumerable<Car> ExpensiveCars();
+        IEnumerable<Car> InExpensiveCars();
+        IEnumerable<Car> GetByModel(string model);
         Car GetOne(int id);
         IList<Car> GetAll();
         void ChangePrice(int id, int newPrice);
@@ -46,6 +49,9 @@ namespace IOUDIE_HFT_2021221.Logic
         void Create(Car newCar);
         void Delete(Car forDelete);
     }
+
+
+
     public class CarLogic : ICarLogic
     {
         ICarShopRepository carRepo;
@@ -96,6 +102,12 @@ namespace IOUDIE_HFT_2021221.Logic
         {
             return carRepo.GetOne(id);
         }
+
+        public IEnumerable<Car> ExpensiveCars()=> carRepo.GetAll().Where(x => x.BasePrice >= 18500);
+        public IEnumerable<Car> InExpensiveCars() => carRepo.GetAll().Where(x => x.BasePrice < 18500);
+
+        public IEnumerable<Car> GetByModel(string model) => carRepo.GetAll().Where(x => x.Model == model);
+        
     }
 
     public interface IBrandLogic
@@ -144,12 +156,13 @@ namespace IOUDIE_HFT_2021221.Logic
 
     public interface IDriverLogic
     {
-        IList<Drivers> GetAll();
-        Drivers GetOne(int id);
+        IEnumerable<Driver> ElderDrivers();
+        IEnumerable<Driver> YoungDrivers();
+        IList<Driver> GetAll();
+        Driver GetOne(int id);
         void ChangeDriverName(int id,string newDriverName);
-        //IList<AverageResult> GetDriverAgeAverages();
-        void Create(Drivers newDriver);
-        void Delete(Drivers forDelete);
+        void Create(Driver newDriver);
+        void Delete(Driver forDelete);
     }
 
     public class DriverLogic : IDriverLogic
@@ -166,7 +179,7 @@ namespace IOUDIE_HFT_2021221.Logic
             driversRepo.ChangeDriverName(id, newDriverName);
         }
 
-        public void Create(Drivers newDriver)
+        public void Create(Driver newDriver)
         {
             if (newDriver.Id<1)
             {
@@ -175,31 +188,30 @@ namespace IOUDIE_HFT_2021221.Logic
             driversRepo.Create(newDriver);
         }
 
-        public void Delete(Drivers forDelete)
+        public void Delete(Driver forDelete)
         {
             driversRepo.Delete(forDelete);
         }
 
-        public IList<Drivers> GetAll()
+        public IEnumerable<Driver> ElderDrivers()=> driversRepo.GetAll().Where(x => x.Age >= 50);
+        
+            
+        
+
+        public IList<Driver> GetAll()
         {
             return driversRepo.GetAll().ToList();
         }
 
-        //public IList<AverageResult> GetDriverAgeAverages()
-        //{
-        //    var q = from driver in driversRepo.GetAll()
-        //            group driver by new { driver.Age } into g
-        //            select new AverageResult()
-        //            {
-        //                AverageAge = g.Average(x => x.Age)
-        //            };
-        //    return q.ToList();
-        //}
+      
 
-        public Drivers GetOne(int id)
+        public Driver GetOne(int id)
         {
             return driversRepo.GetOne(id);
         }
+
+        public IEnumerable<Driver> YoungDrivers()=> driversRepo.GetAll().Where(x => x.Age < 50);
+        
     }
 
 }

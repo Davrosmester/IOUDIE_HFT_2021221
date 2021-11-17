@@ -49,7 +49,7 @@ namespace IOUDIE_HFT_2021221.Repository
             return GetAll().SingleOrDefault(brand => brand.Id == id);
         }
     }
-    public class DriversRepository : Repositories<Drivers>, IDriversRepository
+    public class DriversRepository : Repositories<Driver>, IDriversRepository
     {
         public DriversRepository(DbContext ctx) : base(ctx) { }
         public void ChangeDriverName(int id, string newDriverName)
@@ -63,7 +63,7 @@ namespace IOUDIE_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
-        public override Drivers GetOne(int id)
+        public override Driver GetOne(int id)
         {
             return GetAll().SingleOrDefault(brand => brand.Id == id);
         }
