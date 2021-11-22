@@ -28,6 +28,9 @@ namespace IOUDIE_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
+        public abstract void Delete(int id);
+        
+
         public IQueryable<T> GetAll()
         {
             return ctx.Set<T>();

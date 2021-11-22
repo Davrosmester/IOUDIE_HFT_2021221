@@ -12,6 +12,7 @@ namespace IOUDIE_HFT_2021221.Repository
         T GetOne(int id);
         IQueryable<T> GetAll();
         void Delete(T entity);
+        void Delete(int id);
         void Create(T entity); //only create not update
     }
     public interface ICarShopRepository : IRepository<Car>

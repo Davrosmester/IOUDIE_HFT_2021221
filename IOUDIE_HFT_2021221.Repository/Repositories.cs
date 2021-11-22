@@ -25,6 +25,11 @@ namespace IOUDIE_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
+        public override void Delete(int id)
+        {
+            Delete(GetOne(id));
+        }
+
         public override Car GetOne(int id)
         {
             return GetAll().SingleOrDefault(x => x.Id == id);
@@ -41,6 +46,12 @@ namespace IOUDIE_HFT_2021221.Repository
                 throw new InvalidOperationException("Not Found");
             }
             brand.Name = newBrandName;
+            ctx.SaveChanges();
+        }
+
+        public override void Delete(int id)
+        {
+            ctx.Set<Brand>().Remove(GetOne(id));
             ctx.SaveChanges();
         }
 
@@ -61,6 +72,11 @@ namespace IOUDIE_HFT_2021221.Repository
             }
             drivers.Name = newDriverName;
             ctx.SaveChanges();
+        }
+
+        public override void Delete(int id)
+        {
+            Delete(GetOne(id));
         }
 
         public override Driver GetOne(int id)

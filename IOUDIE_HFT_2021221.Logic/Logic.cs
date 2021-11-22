@@ -48,9 +48,8 @@ namespace IOUDIE_HFT_2021221.Logic
         IList<AverageResult> GetBrandAverages();
         void Create(Car newCar);
         void Delete(Car forDelete);
+        void Delete(int id);
     }
-
-
 
     public class CarLogic : ICarLogic
     {
@@ -107,7 +106,11 @@ namespace IOUDIE_HFT_2021221.Logic
         public IEnumerable<Car> InExpensiveCars() => carRepo.GetAll().Where(x => x.BasePrice < 18500);
 
         public IEnumerable<Car> GetByModel(string model) => carRepo.GetAll().Where(x => x.Model == model);
-        
+
+        public void Delete(int id)
+        {
+            carRepo.Delete(id);
+        }
     }
 
     public interface IBrandLogic
@@ -118,6 +121,7 @@ namespace IOUDIE_HFT_2021221.Logic
         void ChangeBrandName(int id, string newBrandName);
         void Create(Brand newBrand);
         void Delete(Brand forDelete);
+        void Delete(int id);
 
     }
     public class BrandLogic : IBrandLogic
@@ -143,6 +147,11 @@ namespace IOUDIE_HFT_2021221.Logic
             brandRepository.Delete(forDelete);
         }
 
+        public void Delete(int id)
+        {
+            brandRepository.Delete(id);
+        }
+
         public IList<Brand> GetAll()
         {
             return brandRepository.GetAll().ToList();
@@ -163,6 +172,7 @@ namespace IOUDIE_HFT_2021221.Logic
         void ChangeDriverName(int id,string newDriverName);
         void Create(Driver newDriver);
         void Delete(Driver forDelete);
+        void Delete(int id);
     }
 
     public class DriverLogic : IDriverLogic
@@ -191,6 +201,11 @@ namespace IOUDIE_HFT_2021221.Logic
         public void Delete(Driver forDelete)
         {
             driversRepo.Delete(forDelete);
+        }
+
+        public void Delete(int id)
+        {
+            driversRepo.Delete(id);
         }
 
         public IEnumerable<Driver> ElderDrivers()=> driversRepo.GetAll().Where(x => x.Age >= 50);
