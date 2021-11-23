@@ -50,6 +50,7 @@ namespace IOUDIE_HFT_2021221.Logic
         void Create(Car newCar);
         void Delete(Car forDelete);
         void Delete(int id);
+        double AveragePrice();
     }
 
     public class CarLogic : ICarLogic
@@ -116,6 +117,11 @@ namespace IOUDIE_HFT_2021221.Logic
         public void Update(Car updated)
         {
             carRepo.Update(updated);
+        }
+
+        public double AveragePrice()
+        {
+            return (double)carRepo.GetAll().Average(x=>x.BasePrice);
         }
     }
 
