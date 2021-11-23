@@ -16,7 +16,7 @@ namespace IOUDIE_HFT_2021221.Models
         public int Id { get; set; }
         public int Age { get; set; }
         public string Name { get; set; }
-
+        [NotMapped]
         public virtual Car Car { get; set; }
 
 

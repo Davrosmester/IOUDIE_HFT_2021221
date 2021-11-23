@@ -128,7 +128,7 @@ namespace IOUDIE_HFT_2021221.Logic
         void Create(Brand newBrand);
         void Delete(Brand forDelete);
         void Delete(int id);
-
+        void Update(Brand value);
     }
     public class BrandLogic : IBrandLogic
     {
@@ -167,6 +167,11 @@ namespace IOUDIE_HFT_2021221.Logic
         {
             return brandRepository.GetOne(id);
         }
+
+        public void Update(Brand value)
+        {
+            brandRepository.Update(value);
+        }
     }
 
     public interface IDriverLogic
@@ -179,6 +184,7 @@ namespace IOUDIE_HFT_2021221.Logic
         void Create(Driver newDriver);
         void Delete(Driver forDelete);
         void Delete(int id);
+        void Update(Driver value);
     }
 
     public class DriverLogic : IDriverLogic
@@ -229,6 +235,11 @@ namespace IOUDIE_HFT_2021221.Logic
         public Driver GetOne(int id)
         {
             return driversRepo.GetOne(id);
+        }
+
+        public void Update(Driver value)
+        {
+            driversRepo.Update(value);
         }
 
         public IEnumerable<Driver> YoungDrivers()=> driversRepo.GetAll().Where(x => x.Age < 50);
