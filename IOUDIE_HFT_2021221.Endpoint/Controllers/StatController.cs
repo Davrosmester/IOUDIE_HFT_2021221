@@ -1,5 +1,6 @@
 ﻿using IOUDIE_HFT_2021221.Logic;
 using IOUDIE_HFT_2021221.Models;
+using IOUDIE_HFT_2021221.Models.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

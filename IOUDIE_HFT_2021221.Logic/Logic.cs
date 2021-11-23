@@ -1,4 +1,5 @@
 ﻿using IOUDIE_HFT_2021221.Models;
+using IOUDIE_HFT_2021221.Models.Utilities;
 using IOUDIE_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
@@ -6,36 +7,7 @@ using System.Linq;
 
 namespace IOUDIE_HFT_2021221.Logic
 {
-    public class AverageResult
-    {
-        public string BrandName { get; set; }
-        public double AveragePrice { get; set; }
-       
-
-
-        public override bool Equals(object obj)
-        {
-            if (obj is AverageResult)
-            {
-                var other = obj as AverageResult;
-                return this.AveragePrice == other.AveragePrice && this.BrandName == other.BrandName;
-                   //close
-            }
-            else
-            {
-                return false;
-            }
-            
-        }
-        public override int GetHashCode()
-        {
-            return this.BrandName.GetHashCode() + (int)this.AveragePrice;
-        }
-        public override string ToString()
-        {
-            return $"BrandName={BrandName}, AveragePrice={AveragePrice},"; 
-        }
-    }
+    
 
     public interface ICarLogic
     {
@@ -104,8 +76,8 @@ namespace IOUDIE_HFT_2021221.Logic
             return carRepo.GetOne(id);
         }
 
-        public IEnumerable<Car> ExpensiveCars()=> carRepo.GetAll().Where(x => x.BasePrice >= 18500);
-        public IEnumerable<Car> InExpensiveCars() => carRepo.GetAll().Where(x => x.BasePrice < 18500);
+        public IEnumerable<Car> ExpensiveCars()=> carRepo.GetAll().Where(x => x.BasePrice >= 18500); //stat
+        public IEnumerable<Car> InExpensiveCars() => carRepo.GetAll().Where(x => x.BasePrice < 18500);  //stat
 
         public IEnumerable<Car> GetByModel(string model) => carRepo.GetAll().Where(x => x.Model == model);
 

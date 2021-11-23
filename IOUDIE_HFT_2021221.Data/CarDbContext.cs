@@ -58,7 +58,8 @@ namespace IOUDIE_HFT_2021221.Models
                 entity.HasOne(car => car.Brand)
                 .WithMany(brand => brand.Cars)
                 .HasForeignKey(car => car.BrandId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                //.OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
              
              });
 
@@ -67,7 +68,8 @@ namespace IOUDIE_HFT_2021221.Models
                 entity.HasOne(car => car.Car)
                     .WithMany(car => car.Drivers)
                     .HasForeignKey(car => car.CarId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    //.OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Brand>().HasData(bmw, toyota, audi);
