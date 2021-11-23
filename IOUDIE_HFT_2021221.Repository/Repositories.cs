@@ -34,6 +34,15 @@ namespace IOUDIE_HFT_2021221.Repository
         {
             return GetAll().SingleOrDefault(x => x.Id == id);
         }
+
+        public override void Update(Car updated)
+        {
+            var forUpdate = GetOne(updated.Id);
+            forUpdate.BrandId = updated.BrandId;
+            forUpdate.BasePrice = updated.BasePrice;
+            forUpdate.Model = updated.Model;
+            ctx.SaveChanges();
+        }
     }
     public class BrandRepository : Repositories<Brand>, IBrandRepository
     {
@@ -59,6 +68,13 @@ namespace IOUDIE_HFT_2021221.Repository
         {
             return GetAll().SingleOrDefault(brand => brand.Id == id);
         }
+
+        public override void Update(Brand updated)
+        {
+            var ForUpdate = GetOne(updated.Id);
+            ForUpdate.Name = updated.Name;
+            ctx.SaveChanges();
+        }
     }
     public class DriversRepository : Repositories<Driver>, IDriversRepository
     {
@@ -82,6 +98,15 @@ namespace IOUDIE_HFT_2021221.Repository
         public override Driver GetOne(int id)
         {
             return GetAll().SingleOrDefault(brand => brand.Id == id);
+        }
+
+        public override void Update(Driver updated)
+        {
+            var forUpdated = GetOne(updated.Id);
+            forUpdated.Name = updated.Name;
+            forUpdated.Age = updated.Age;
+            forUpdated.CarId = updated.CarId;
+            ctx.SaveChanges();
         }
     }
 }

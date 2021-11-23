@@ -43,6 +43,7 @@ namespace IOUDIE_HFT_2021221.Logic
         IEnumerable<Car> InExpensiveCars();
         IEnumerable<Car> GetByModel(string model);
         Car GetOne(int id);
+        void Update(Car updated);
         IList<Car> GetAll();
         void ChangePrice(int id, int newPrice);
         IList<AverageResult> GetBrandAverages();
@@ -110,6 +111,11 @@ namespace IOUDIE_HFT_2021221.Logic
         public void Delete(int id)
         {
             carRepo.Delete(id);
+        }
+
+        public void Update(Car updated)
+        {
+            carRepo.Update(updated);
         }
     }
 
