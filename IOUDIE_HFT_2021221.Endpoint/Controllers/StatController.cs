@@ -1,4 +1,5 @@
 ﻿using IOUDIE_HFT_2021221.Logic;
+using IOUDIE_HFT_2021221.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace IOUDIE_HFT_2021221.Endpoint.Controllers
     public class StatController : ControllerBase
     {
         ICarLogic cl;
+        IDriverLogic dl;
 
-        public StatController(ICarLogic cl)
+        public StatController(ICarLogic cl, IDriverLogic dl)
         {
             this.cl = cl;
+            this.dl = dl;
         }
 
         [HttpGet]
@@ -26,13 +29,37 @@ namespace IOUDIE_HFT_2021221.Endpoint.Controllers
             return cl.AveragePrice();
         }
 
-        
+
         [HttpGet]
         public IEnumerable<AverageResult> AverageByBrands()
         {
             return cl.GetBrandAverages();
         }
+        [HttpGet]
+        public IEnumerable<Car> ExpensiveCars()
+        {
+            return cl.ExpensiveCars();
+        }
+        [HttpGet]
+        public IEnumerable<Car> InexpensiveCars()
+        {
+            return cl.InExpensiveCars();
+        }
+        [HttpGet("{model}")]
+        public IEnumerable<Car> GetByModel(string model)
+        {
+            return cl.GetByModel(model);
+        }
+        [HttpGet]
+        public IEnumerable<Driver> ElderDrivers()
+        {
+            return dl.ElderDrivers();
+        }
+        [HttpGet]
+        public IEnumerable<Driver> YoungDrivers()
+        {
+            return dl.YoungDrivers();
+        }
 
-       
     }
 }
