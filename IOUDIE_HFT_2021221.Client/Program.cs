@@ -54,8 +54,10 @@ namespace IOUDIE_HFT_2021221.Client
                  Console.WriteLine("Give and Id");
                  int id = int.Parse(Console.ReadLine());
                  var car = restService.GetSingle<Car>($"/car/{id}");
-                 car.Model = "Suzuki Swift";
+                 Console.WriteLine("give a new model");
+                 car.Model = Console.ReadLine();
                  restService.Put<Car>(car, $"/car");
+                 Console.WriteLine("car updated");
                  Console.ReadLine();
              });
             carMenu.Add("Delete", () =>
@@ -114,8 +116,10 @@ namespace IOUDIE_HFT_2021221.Client
                 Console.WriteLine("Give and Id");
                 int id = int.Parse(Console.ReadLine());
                 var brand = restService.GetSingle<Brand>($"/brand/{id}");
-                brand.Name = "Volkswagen";
+                Console.WriteLine("give a new name");
+                brand.Name = Console.ReadLine();
                 restService.Put<Brand>(brand, $"/brand");
+                Console.WriteLine("brand updated");
                 Console.ReadLine();
             });
             brandMenu.Add("Delete", () =>
@@ -123,6 +127,7 @@ namespace IOUDIE_HFT_2021221.Client
                 Console.WriteLine("Give and Id");
                 int id = int.Parse(Console.ReadLine());
                 restService.Delete(id, $"/brand");
+                Console.WriteLine("brand deleted");
                 Console.ReadLine();
             });
             brandMenu.Add("Exit", () =>
@@ -163,7 +168,7 @@ namespace IOUDIE_HFT_2021221.Client
                 restService.Post<Driver>(
                     new Driver()
                     {
-                        Name = name,CarId=id
+                        Name = name,CarId=id,
                     },
                     "/driver"); ;
                 Console.WriteLine("Driver created");
@@ -175,8 +180,10 @@ namespace IOUDIE_HFT_2021221.Client
                 Console.WriteLine("Give and Id");
                 int id = int.Parse(Console.ReadLine());
                 var driver = restService.GetSingle<Driver>($"/driver/{id}");
-                driver.Name = "Kis Pista";
-                restService.Put<Driver>(driver, $"/brand");
+                Console.WriteLine("give a new name");
+                driver.Name = Console.ReadLine();
+                restService.Put<Driver>(driver, $"/driver");
+                Console.WriteLine("driver updated");
                 Console.ReadLine();
             });
             driverMenu.Add("Delete", () =>

@@ -181,9 +181,11 @@ namespace IOUDIE_HFT_2021221.Logic
 
         public void Create(Driver newDriver)
         {
-            if (newDriver.Id<1)
+           
+            if (newDriver.Id<0)
             {
                 throw new ArgumentException(nameof(newDriver), "Driver id must be positive");
+                
             }
             driversRepo.Create(newDriver);
         }
