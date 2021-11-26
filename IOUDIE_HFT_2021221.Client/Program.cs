@@ -27,7 +27,7 @@ namespace IOUDIE_HFT_2021221.Client
             });
             carMenu.Add("GetOne", () =>
              {
-                 Console.WriteLine("Adjon meg egy id-t");
+                 Console.WriteLine("give and id");
                  int id = int.Parse(Console.ReadLine());
                  var res = restService.GetSingle<Car>($"/car/{id}");
                  Console.WriteLine(res.Model);
@@ -35,9 +35,15 @@ namespace IOUDIE_HFT_2021221.Client
              });
             carMenu.Add("Create", () =>
             {
+                Console.WriteLine("give a model");
+                string name = Console.ReadLine();
+                Console.WriteLine("give a brandId");
+                int id=int.Parse(Console.ReadLine());
                 restService.Post<Car>(
-                    new Car() {
-                        Model = "Xc70", BrandId = 1 },
+                    new Car()
+                    {
+                        Model = name,BrandId=id
+                    },
                     "/car");
                 Console.WriteLine("Car created");
                 Console.ReadLine();
@@ -82,6 +88,7 @@ namespace IOUDIE_HFT_2021221.Client
             });
             brandMenu.Add("GetOne", () =>
             {
+                Console.WriteLine("give and Id");
                 int id = int.Parse(Console.ReadLine());
                 var res = restService.GetSingle<Brand>($"/brand/{id}");
                 Console.WriteLine(res.Name);
@@ -90,10 +97,12 @@ namespace IOUDIE_HFT_2021221.Client
             });
             brandMenu.Add("Create", () =>
             {
+                Console.WriteLine("give a name");
+                string name = Console.ReadLine();
                 restService.Post<Brand>(
                     new Brand()
                     {
-                        Name="Volkswagen Golf",Id=1
+                        Name=name
                     },
                     "/brand");
                 Console.WriteLine("Brand created");
@@ -139,6 +148,7 @@ namespace IOUDIE_HFT_2021221.Client
             });
             driverMenu.Add("GetOne", () =>
             {
+                Console.WriteLine("Give and id");
                 int id = int.Parse(Console.ReadLine());
                 var res = restService.GetSingle<Driver>($"/driver/{id}");
                 Console.WriteLine(res.Name);
@@ -146,12 +156,16 @@ namespace IOUDIE_HFT_2021221.Client
             });
             driverMenu.Add("Create", () =>
             {
+                Console.WriteLine("give a name");
+               string name= Console.ReadLine();
+                Console.WriteLine("give a car id");
+                int id = int.Parse(Console.ReadLine());
                 restService.Post<Driver>(
                     new Driver()
                     {
-                        Name="Muhammad Ali",Id=1
+                        Name = name,CarId=id
                     },
-                    "/driver");
+                    "/driver"); ;
                 Console.WriteLine("Driver created");
                 Console.ReadLine();
 
@@ -261,7 +275,7 @@ namespace IOUDIE_HFT_2021221.Client
             mainconsole.Add("Exit: ", mainconsole.CloseMenu);
 
             mainconsole.Show();
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }
