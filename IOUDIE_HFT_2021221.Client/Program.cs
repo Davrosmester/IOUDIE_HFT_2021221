@@ -27,9 +27,11 @@ namespace IOUDIE_HFT_2021221.Client
             });
             carMenu.Add("GetOne", () =>
              {
+                 Console.WriteLine("Adjon meg egy id-t");
                  int id = int.Parse(Console.ReadLine());
                  var res = restService.GetSingle<Car>($"/car/{id}");
-             
+                 Console.WriteLine(res.Model);
+                 Console.ReadLine();
              });
             carMenu.Add("Create", () =>
             {
@@ -38,7 +40,8 @@ namespace IOUDIE_HFT_2021221.Client
                         Model = "Xc70", BrandId = 1 },
                     "/car");
                 Console.WriteLine("Car created");
-               
+                Console.ReadLine();
+
             });
             carMenu.Add("Update", () =>
              {
@@ -47,14 +50,15 @@ namespace IOUDIE_HFT_2021221.Client
                  var car = restService.GetSingle<Car>($"/car/{id}");
                  car.Model = "Suzuki Swift";
                  restService.Put<Car>(car, $"/car");
-                
+                 Console.ReadLine();
              });
             carMenu.Add("Delete", () =>
             {
                 Console.WriteLine("Give and Id");
                 int id = int.Parse(Console.ReadLine());
                 restService.Delete(id, $"/car");
-              
+                Console.WriteLine("Car deleted");
+                Console.ReadLine();
             });
             carMenu.Add("Exit", () =>
             {
@@ -80,6 +84,8 @@ namespace IOUDIE_HFT_2021221.Client
             {
                 int id = int.Parse(Console.ReadLine());
                 var res = restService.GetSingle<Brand>($"/brand/{id}");
+                Console.WriteLine(res.Name);
+                Console.ReadLine();
 
             });
             brandMenu.Add("Create", () =>
@@ -91,6 +97,7 @@ namespace IOUDIE_HFT_2021221.Client
                     },
                     "/brand");
                 Console.WriteLine("Brand created");
+                Console.ReadLine();
 
             });
             brandMenu.Add("Update", () =>
@@ -100,14 +107,14 @@ namespace IOUDIE_HFT_2021221.Client
                 var brand = restService.GetSingle<Brand>($"/brand/{id}");
                 brand.Name = "Volkswagen";
                 restService.Put<Brand>(brand, $"/brand");
-
+                Console.ReadLine();
             });
             brandMenu.Add("Delete", () =>
             {
                 Console.WriteLine("Give and Id");
                 int id = int.Parse(Console.ReadLine());
                 restService.Delete(id, $"/brand");
-
+                Console.ReadLine();
             });
             brandMenu.Add("Exit", () =>
             {
@@ -134,7 +141,8 @@ namespace IOUDIE_HFT_2021221.Client
             {
                 int id = int.Parse(Console.ReadLine());
                 var res = restService.GetSingle<Driver>($"/driver/{id}");
-
+                Console.WriteLine(res.Name);
+                Console.ReadLine();
             });
             driverMenu.Add("Create", () =>
             {
@@ -145,6 +153,7 @@ namespace IOUDIE_HFT_2021221.Client
                     },
                     "/driver");
                 Console.WriteLine("Driver created");
+                Console.ReadLine();
 
             });
             driverMenu.Add("Update", () =>
@@ -154,14 +163,15 @@ namespace IOUDIE_HFT_2021221.Client
                 var driver = restService.GetSingle<Driver>($"/driver/{id}");
                 driver.Name = "Kis Pista";
                 restService.Put<Driver>(driver, $"/brand");
-
+                Console.ReadLine();
             });
             driverMenu.Add("Delete", () =>
             {
                 Console.WriteLine("Give and Id");
                 int id = int.Parse(Console.ReadLine());
                 restService.Delete(id, $"/driver");
-
+                Console.WriteLine("Driver deleted");
+                Console.ReadLine();
             });
             driverMenu.Add("Exit", () =>
             {
@@ -187,7 +197,7 @@ namespace IOUDIE_HFT_2021221.Client
             statmenu.Add("Average Car Price", () => {
                 var res = restService.GetSingle<double>("/stat/averageprice");
                 Console.WriteLine($"Avg car price={res}");
-               
+                Console.ReadLine();
             });
             statmenu.Add("Expensive Cars", () =>
             {
@@ -196,7 +206,7 @@ namespace IOUDIE_HFT_2021221.Client
                 {
                     Console.WriteLine(item.Model);
                 }
-              
+                Console.ReadLine();
             });
             statmenu.Add("InExpensive Cars", () =>
             {
